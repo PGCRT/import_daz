@@ -55,7 +55,7 @@ if fail:
 #   Modules
 #----------------------------------------------------------
 
-Modules = ["buildnumber", "settings", "utils", "error", "load_json", "driver", "uilist",
+Modules = ["buildnumber", "updater", "settings", "utils", "error", "load_json", "driver", "uilist",
            "selector", "propgroups", "daz", "apply", "fileutils", "asset", "channels", "formula",
            "rig_utils", "bone_data", "transform", "node", "figure", "bone", "geometry",
            "store", "modifier", "load_morph", "morphing", "slider", "baked",
@@ -257,6 +257,13 @@ class DazPreferences(bpy.types.AddonPreferences):
     def draw(self, context):
         global thePrefs
         thePrefs = self
+        box = self.layout.box()
+        box.label(text = "Update")
+        row = box.row()
+        text,icon = updater.getStatusLabel()
+        row.label(text = text, icon = icon)
+        row.operator("daz.update_addon")
+
         self.layout.prop(self, "settingsDir")
         #self.layout.operator("daz.update_settings")
         row = self.layout.row()
@@ -295,7 +302,7 @@ class DAZ_OT_DisableAllFeatures(bpy.types.Operator):
 #   Register
 #----------------------------------------------------------
 
-Regnames = ["propgroups", "daz", "uilist", "driver", "selector",
+Regnames = ["updater", "propgroups", "daz", "uilist", "driver", "selector",
             "figure", "geometry", "dbzfile",
             "fix", "animation", "morphing", "slider", "panel", "erc",
             "material", "cgroup", "render", "visibility",

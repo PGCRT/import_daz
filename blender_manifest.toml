@@ -18,6 +18,7 @@ copyright = [
 
 [permissions]
 files = "Import DAZ files from disk"
+network = "Check for updates and download updates from GitHub"
 
 [build]
 paths_exclude_pattern = [
